@@ -11,10 +11,19 @@
     "url": "git+https://github.com/pitoms/Goldin-Fullstack.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Pitom Saha",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/pitoms/Goldin-Fullstack/issues"
   },
-  "homepage": "https://github.com/pitoms/Goldin-Fullstack#readme"
+  "homepage": "https://github.com/pitoms/Goldin-Fullstack#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chromedriver": "^91.0.1",
+    "geckodriver": "^2.0.1",
+    "nightwatch": "^1.7.7",
+    "nodemon": "^2.0.12"
+  }
 }
