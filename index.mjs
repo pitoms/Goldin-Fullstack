@@ -12,12 +12,11 @@ app.use(cors());
 
 // Routes
 app.get("/", function (req, res) {
-  //res.render("views/pages/index");
-  res.send({ test: "testing response" });
+  res.render("pages/index");
 });
 
 app.get("/projects/:id", function (req, res) {
-  res.render("views/pages/index");
+  res.render("pages/index");
 });
 
 app.listen(PORT, () => console.log(`App running at http://localhost:${PORT}`));
