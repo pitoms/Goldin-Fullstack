@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/pitoms/Goldin-Fullstack#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "ejs": "^3.1.6",
