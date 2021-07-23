@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <script src="clientSideFunctionality.js"></script>
 
+<div id = "projectsWrapper">
     <% projectPageData.projects.forEach((project)=>{ %>
          <div>
              <img style ="height:10px"src="<%= project.image_url%>"/>
@@ -9,6 +10,8 @@
              Updated: <%= new Date(project.update*1000).toLocaleString() %>
         </div> 
     <% }) %>
-<button> Prev </button>
-<button> Next </button>
+</div>
+<button id ="prev" onclick ="prev(<%-projectPageData.page%>)"> Prev </button>
+
+<button id="next" onclick ="next(<%-projectPageData.page%>)">> Next </button>
 </html>

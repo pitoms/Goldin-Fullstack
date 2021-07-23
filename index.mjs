@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 4000;
 
 // Set view engine to ejs
 app.set("view engine", "ejs");
-
 app.use(cors());
+app.use(express.static("static"));
 
 //------------------------------ Routes
 app.get("/", getProjects);
@@ -28,12 +28,11 @@ function getProjects(req, res) {
     url: URL,
   })
     .then((response) => {
+      console.log(response.data);
       res.locals.projectPageData = response.data;
+      console.log(process.cwd());
+      res.sendFile(`${process.cwd()}/clientSideFunctionality.js`);
       res.render("pages/index");
     })
     .catch((err) => console.log(err));
 }
-
-// // Returns HTML String of projects page
-// // Not using EJS because Hearsh told me EJS is only "pseudo SSR' :'(
-// function whoNeedsReactOrEJSWhenYouHaveVanillaJS(data) {}
