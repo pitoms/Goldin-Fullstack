@@ -4,7 +4,7 @@ function loadProjects(pageNum) {
   document.getElementById("projectsWrapper").innerHTML = "";
 }
 
-// Client side prev button functionality
+// < button functionality
 function prev(currPage) {
   if (currPage > 1) {
     console.log(`prev(${currPage})`);
@@ -29,16 +29,10 @@ function prev(currPage) {
   }
 }
 
-// Client side forward functionality
+// > button functionality
 function next(currPage) {
   console.log(`next(${currPage})`);
   loadProjects(currPage + 1);
-
-  // Setup our new prev button
-  document.getElementById("prev").onclick = `prev(${currPage - 1})`;
-
-  // Setup our new next button
-  document.getElementById("next").onclick = `next(${currPage})`;
 
   // Setup our new prev button
   let prevButton = document.getElementById("prev");
