@@ -3,6 +3,17 @@ window.addEventListener("popstate", function (e) {
   location.reload();
 });
 
+// Tooltips - To do: caching fetched data in local storage
+let projectElements = document.getElementsByClassName("project");
+projectElements.forEach((projectDiv) => {
+  projectDiv.addEventListener("mouseover", (e) => {});
+  projectDiv.addEventListener("mouseleave", (e) => {});
+});
+
+// Creates the tooltip HTML either from localstorage data or
+// a fetch
+function generateToolTips(projectID) {}
+
 // Replaces the projects listpage content with a new page of projects
 function loadProjects(pageNum) {
   console.log(`Displaying page num:${pageNum}`);
