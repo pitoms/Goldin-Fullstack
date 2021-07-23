@@ -6,7 +6,28 @@ window.addEventListener("popstate", function (e) {
 // Replaces the projects listpage content with a new page of projects
 function loadProjects(pageNum) {
   console.log(`Displaying page num:${pageNum}`);
+  console.log("Requesting: ", `http://localhost:4000/relayProjects=${pageNum}`);
+  let loadingImg = document.createElement("img");
+  loadingImg.src = "https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=82a1493bn64f95wlrhgldv1wfihr40dyux2r8o37f5wjlmpg&rid=200w.gif&ct=g";
   document.getElementById("projectsWrapper").innerHTML = "";
+  document.getElementById("projectsWrapper").appendChild(loadingImg);
+
+  fetch(`http://localhost:4000/relayProjects=${pageNum}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      document.getElementById("projectsWrapper").innerHTML = JSON.stringify(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 ///TODO: Refactor next and prev into one function

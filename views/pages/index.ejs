@@ -3,11 +3,16 @@
 
 <div id = "projectsWrapper">
     <% projectPageData.projects.forEach((project)=>{ %>
-         <div>
+         <div class="project">
              <img style ="height:10px"src="<%= project.image_url%>"/>
-             <a href = "<%=project.url%>"><%=project.name%></a>
-            <%  %> 
-             Updated: <%= new Date(project.update*1000).toLocaleString() %>
+             <a href = "<%-`http://localhost:4000/project=${project.id}` %>" >
+                <%=project.name%>
+            </a>
+         
+             Updated: <%-`${project.updated}` %>
+             
+              
+             
         </div> 
     <% }) %>
 </div>

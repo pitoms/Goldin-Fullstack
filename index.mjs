@@ -14,6 +14,7 @@ app.use(express.static("static"));
 //------------------------------ Routes
 app.get("/", getProjects);
 app.get("/page=:page", getProjects);
+app.get("/project=:id", getProject);
 app.get("/relayProjects=:page", relayProjects);
 app.get("/relayUserInfo=:userID", relayUserInfo);
 
@@ -64,6 +65,20 @@ function relayUserInfo(req, res) {
   })
     .then((response) => {
       res.json(response.data);
+    })
+    .catch((err) => console.log(err));
+}
+
+function getProject(req, res) {
+  const URL = `http://api.hackaday.io/v1/projects/${req.params.id}?api_key=${process.env.API_KEY}`;
+
+  return axios({
+    method: "get",
+    url: URL,
+  })
+    .then((response) => {
+      res.locals.projectInfo = response.data;
+      res.render("pages/projectInfo");
     })
     .catch((err) => console.log(err));
 }
