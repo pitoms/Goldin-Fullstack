@@ -8,12 +8,22 @@ function loadProjects(pageNum) {
 function prev(currPage) {
   if (currPage > 1) {
     console.log(`prev(${currPage})`);
-    loadProjects(currPage - 1);
+    loadProjects(currPage);
     // Setup our new prev button
-    document.getElementById("prev").onclick = `prev(${currPage - 1})`;
+    // let prevButton = document.getElementById("prev");
+    // prevButton.removeEventListener("click", prev);
+    // prevButton.addEventListener("click", () => {
+    //   preventDefault();
+    //   prev(currPage - 1);
+    // });
 
     // Setup our new next button
-    document.getElementById("next").onclick = `next(${currPage})`;
+    // let nextButton = document.getElementById("next");
+    // prevButton.removeEventListener("click", next);
+    // nextButton.addEventListener("click", () => {
+    //   preventDefault();
+    //   next(currPage + 1);
+    // });
 
     // Add our current page to history
     history.pushState(null, "", window.location.href);
@@ -32,21 +42,23 @@ function prev(currPage) {
 // > button functionality
 function next(currPage) {
   console.log(`next(${currPage})`);
-  loadProjects(currPage + 1);
+  loadProjects(currPage);
 
   // Setup our new prev button
-  let prevButton = document.getElementById("prev");
-  prevButton.removeEventListener("click", prev);
-  prevButton.addEventListener("click", () => {
-    prev(currPage);
-  });
+  // let prevButton = document.getElementById("prev");
+  // prevButton.removeEventListener("click", prev);
+  // prevButton.addEventListener("click", () => {
+  //   preventDefault();
+  //   prev(currPage - 1);
+  // });
 
   // Setup our new next button
-  let nextButton = document.getElementById("next");
-  prevButton.removeEventListener("click", next);
-  nextButton.addEventListener("click", () => {
-    next(currPage + 1);
-  });
+  // let nextButton = document.getElementById("next");
+  // prevButton.removeEventListener("click", next);
+  // nextButton.addEventListener("click", () => {
+  //   preventDefault();
+  //   next(currPage + 1);
+  // });
 
   // Add our current page to history
   history.pushState(null, "", window.location.href);
