@@ -17,7 +17,7 @@ app.get("/page=:page", getProjects);
 
 app.listen(PORT, () => console.log(`App running at http://localhost:${PORT}`));
 
-//------------------------------ HTML Generation
+//------------------------------ Page Generators
 function getProjects(req, res) {
   let perPage = 10;
   let pageNum = req.params.page || 1;
@@ -28,10 +28,10 @@ function getProjects(req, res) {
     url: URL,
   })
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       res.locals.projectPageData = response.data;
-      console.log(process.cwd());
-      res.sendFile(`${process.cwd()}/clientSideFunctionality.js`);
+      // console.log(process.cwd());
+      res.sendFile(`${process.cwd()}/client.js`);
       res.render("pages/index");
     })
     .catch((err) => console.log(err));
