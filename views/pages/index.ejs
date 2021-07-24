@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<script  src="client.js"></script>
+<script  src="./client.js"></script>
 
 <div id = "projectsWrapper">
     <% projectPageData.projects.forEach((project)=>{ %>
@@ -8,12 +8,8 @@
              <a href = "<%-`http://localhost:4000/project=${project.id}` %>" >
                 <%=project.name%>
             </a>
-         
              Updated: <%-`${project.updated}` %>
-             
-              
-             
-        </div> 
+             <div class="tooltip"></div> 
     <% }) %>
 </div>
 <button id ="prev" onclick ="prev(<%-projectPageData.page - 1%>)"> &#8249; </button>
