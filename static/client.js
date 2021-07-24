@@ -5,10 +5,21 @@ window.addEventListener("popstate", function (e) {
 
 // Tooltips - To do: caching fetched data in local storage
 let projectElements = document.getElementsByClassName("project");
-projectElements.forEach((projectDiv) => {
-  projectDiv.addEventListener("mouseover", (e) => {});
-  projectDiv.addEventListener("mouseleave", (e) => {});
-});
+console.log(projectElements);
+
+for (let project of projectElements) {
+  console.log("hit");
+  let tooltip = document.createElement("div");
+  tooltip.style.width = "50px";
+
+  project.addEventListener("mouseover", (e) => {
+    project.appendChild(tooltip);
+    //tooltip.id = `tooltip${}`; // TODO - get id from div
+  });
+  project.addEventListener("mouseleave", (e) => {
+    project.removeChild(tooltip);
+  });
+}
 
 // Creates the tooltip HTML either from localstorage data or
 // a fetch
