@@ -1,18 +1,14 @@
 <!DOCTYPE html>
+<script  src="./ejs.js"></script>
 <script  src="./client.js"></script>
 
-<div id = "projectsWrapper">
-    <% projectPageData.projects.forEach((project)=>{ %>
-         <div class="project">
-             <img style ="height:10px"src="<%= project.image_url%>"/>
-             <a href = "<%-`http://localhost:4000/project=${project.id}` %>" >
-                <%=project.name%>
-            </a>
-             Updated: <%-`${project.updated}` %>
-             <div class="tooltip"></div> 
-    <% }) %>
-</div>
-<button id ="prev" onclick ="prev(<%-projectPageData.page - 1%>)"> &#8249; </button>
 
+<div id = "projectsWrapper">
+    <%- include('../partials/projectList')%>
+</div>
+
+<span id="template" style="display:none"  >
+</span>
+<button id ="prev" onclick ="prev(<%-projectPageData.page - 1%>)"> &#8249; </button>
 <button id="next" onclick ="next(<%-projectPageData.page + 1%>)"> &#8250; </button>
 </html>

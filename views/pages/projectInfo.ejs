@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 
-<div><%=JSON.stringify(projectInfo)%></div>
+    <%-console.log(projectInfo)%>
+    <h4><%-projectInfo.name%></h4>
+    <img src="<%= projectInfo.image_url%>" style = "height:50px"/>
+    <div class="desc"><%-projectInfo.summary%></div>
+    <div class="tags"><%-projectInfo.tags%> Updated: <%-`${projectInfo.updated}` %></div>
+
 
 <div>Related Projects</div>
 </html>

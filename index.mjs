@@ -1,6 +1,7 @@
 import {} from "dotenv/config.js";
 import axios from "axios";
 import express from "express";
+import fs from "fs";
 import cors from "cors";
 import sass from "sass";
 import path from "path";
@@ -10,7 +11,6 @@ const PORT = process.env.PORT || 4000;
 // Set view engine to ejs
 app.set("view engine", "ejs");
 app.use(cors());
-// app.use(express.static("public"));
 app.use(express.static(path.join(process.cwd(), "public")));
 
 //------------------------------ Routes
@@ -39,6 +39,8 @@ function getProjects(req, res) {
       .get(URL)
       .then((response) => {
         res.locals.projectPageData = response.data;
+
+        // res.locals.projectListTemplate = getEJSTemplate("./views/partials/projectList.ejs");
         projectsCache.set(pageNum, response.data);
         res.render("pages/index");
       })
@@ -47,6 +49,12 @@ function getProjects(req, res) {
     res.locals.projectPageData = projectsCache.get(pageNum);
     res.render("pages/index");
   }
+}
+
+//Grabs a server EJS File and stringify's it.
+// Allows Serverside templates to be reused on client side
+function getEJSTemplate(path) {
+  return fs.readFileSync(path, "UTF-8");
 }
 
 // Relay the projects JSON data from API so key isn't exposed on client side.

@@ -1,31 +1,15 @@
+let projects;
+let usersCache = new Map();
+
 // On back or forward button - load the page from the server
 window.addEventListener("popstate", function (e) {
   location.reload();
 });
 
 window.onload = () => {
-  // Tooltips
-  let projectElements = document.getElementsByClassName("project");
-
-  console.log(projectElements);
-  // console.log(projectElements.length);
-
-  for (let project of projectElements) {
-    let tooltip = document.createElement("div");
-    tooltip.style.width = "50px";
-
-    project.addEventListener("mouseover", (e) => {
-      project.appendChild(tooltip);
-      //tooltip.id = `tooltip${}`; // TODO - get id from div
-    });
-    project.addEventListener("mouseleave", (e) => {
-      project.removeChild(tooltip);
-    });
-  }
+  setToolTipsHover();
+  fetchUsers();
 };
-// Creates the tooltip HTML either from localstorage data or
-// a fetch
-function generateToolTips(projectID) {}
 
 // Replaces the projects listpage content with a new page of projects
 function loadProjects(pageNum) {
@@ -47,17 +31,130 @@ function loadProjects(pageNum) {
       return response.json();
     })
     .then((data) => {
-      document.getElementById("projectsWrapper").innerHTML = JSON.stringify(data);
+      projects = data.projects;
+      buildProjectListHTML(projects);
+
+      console.log(projects);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
+function setToolTipsHover() {
+  let projectElements = document.getElementsByClassName("project");
+
+  for (let project of projectElements) {
+    let tooltip = project.childNodes[1];
+
+    project.addEventListener("mouseover", (e) => {
+      tooltip.style.display = "block";
+    });
+    project.addEventListener("mouseleave", (e) => {
+      tooltip.style.display = "none";
+    });
+  }
+}
+
+// Grab user data of projects from server if not previously fetched
+// Uses hidden id's to lookup user data
+function fetchUsers() {
+  let tooltips = document.getElementsByClassName("tooltip");
+
+  for (let tooltip of tooltips) {
+    let userID = tooltip.innerText;
+    if (!usersCache.has(userID)) {
+      fetch(`http://localhost:4000/relayUserInfo=${userID}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          usersCache.set(userID, data);
+          fillToolTip(tooltip, data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      fillToolTip(tooltip, usersCache.get(userID));
+    }
+  }
+}
+
+//Add user data html to tooltips
+function fillToolTip(tooltip, userData) {
+  console.log("filling tooltip:", tooltip);
+
+  tooltip.innerHTML = "";
+  //Profile image
+  let profPic = document.createElement("img");
+  profPic.style.height = "50px";
+  profPic.src = userData.image_url;
+  tooltip.appendChild(profPic);
+
+  let name = document.createElement("span");
+  name.innerText = userData.screen_name;
+  tooltip.appendChild(name);
+}
+
+// Given the project list response from the API
+// Fills the wrapper with divs for each project
+function buildProjectListHTML(projects) {
+  let wrapper = document.getElementById("projectsWrapper");
+  wrapper.innerHTML = "";
+
+  projects.forEach((project) => {
+    // Project div
+    let projectDiv = document.createElement("div");
+    projectDiv.style.zIndex = -1;
+    projectDiv.className = "project";
+
+    //Tooltip div
+    let tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    tooltip.style.display = "none";
+    tooltip.style.zIndex = 5;
+    tooltip.style.position = "absolute";
+    tooltip.style.backgroundColor = "white";
+    tooltip.innerText = project.owner_id;
+
+    projectDiv.appendChild(tooltip);
+
+    projectDiv.addEventListener("mouseover", (e) => {
+      tooltip.style.display = "block";
+    });
+    projectDiv.addEventListener("mouseleave", (e) => {
+      tooltip.style.display = "none";
+    });
+
+    // Image div
+    let prjImg = document.createElement("img");
+    prjImg.style.height = "10px";
+    prjImg.src = project.image_url;
+    projectDiv.appendChild(prjImg);
+
+    let prjName = document.createElement("a");
+    prjName.href = `http://localhost:4000/project=${project.id}`;
+    prjName.innerText = project.name;
+    projectDiv.appendChild(prjName);
+
+    wrapper.appendChild(projectDiv);
+  });
+
+  fetchUsers();
+}
+
 ///TODO: Refactor next and prev into one function
 // < button functionality
 function prev(currPage) {
   if (currPage > 1) {
+    page = currPage;
     console.log(`prev(${currPage})`);
     loadProjects(currPage);
 
@@ -79,6 +176,7 @@ function prev(currPage) {
 // > button functionality
 function next(currPage) {
   console.log(`next(${currPage})`);
+  page = currPage;
   loadProjects(currPage);
 
   // Add our current page to history
