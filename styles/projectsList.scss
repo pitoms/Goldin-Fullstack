@@ -1,0 +1,18 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #22031f;
+$secondary-color: #58a4b0;
+
+#wrapper {
+  font: 100% $font-stack;
+  font-size: 2em;
+  color: $secondary-color;
+  background-color: $primary-color;
+  display: flexbox;
+  width: 100%;
+}
+
+.header {
+  background-color: $primary-color;
+  display: flexbox;
+  width: 100%;
+}

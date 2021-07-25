@@ -1,0 +1,16 @@
+#wrapper {
+  font: 100% Helvetica, sans-serif;
+  font-size: 2em;
+  color: #58a4b0;
+  background-color: #22031f;
+  display: flexbox;
+  width: 100%;
+}
+
+.header {
+  background-color: #22031f;
+  display: flexbox;
+  width: 100%;
+}
+
+/*# sourceMappingURL=projectsList.css.map */

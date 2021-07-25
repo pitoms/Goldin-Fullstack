@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.mjs",
-    "dev": "nodemon index.mjs"
+    "dev": "(nodemon index.mjs) & sass --watch ./styles:./public/build/styles"
   },
   "repository": {
     "type": "git",

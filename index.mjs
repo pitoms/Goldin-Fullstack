@@ -125,6 +125,7 @@ function getRecommendProjects(projectData) {
   // Iterate through tags and store project recs until
   if (!recsCache.has(projectID)) {
     let tags = projectData.tags;
+    console.log(tags);
     let recs = [];
     for (let i = 0; i < 3; i++) {
       let URL = `https://api.hackaday.io/v1/search/projects?api_key=${process.env.API_KEY}&search_term=${tags[i % tags.length]}&per_page=2`;
@@ -136,7 +137,7 @@ function getRecommendProjects(projectData) {
         .catch((err) => console.log(err));
     }
     recsCache.set(projectID, recs);
-    console.log(recs);
+    // console.log(recs);
     return recs;
   } else {
     return recsCache.get(id);
