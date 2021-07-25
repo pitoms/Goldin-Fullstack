@@ -8,4 +8,11 @@
 
 
 <div>Related Projects</div>
+<%- console.log("ejs recs", recs)%>
+<% recs.forEach((rec)=>{%>
+    <div class="recommendation"><%-rec.name%></div>
+    <img src= "<%=rec.image_url%>"/>
+
+
+<% }) %>
 </html>

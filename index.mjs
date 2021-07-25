@@ -25,7 +25,8 @@ app.listen(PORT, () => console.log(`App running at http://localhost:${PORT}`));
 // Because hackaday is broke and cant pay for server resources
 let projectsCache = new Map(); // key = page #, value = JSON response object
 let projectCache = new Map(); // key = project #, value = JSON response object
-let userCache = new Map(); // key = userID , value = JSON response object
+let userCache = new Map(); // key = user #, value = JSON response object
+let recsCache = new Map(); // key = project #, value = JSON recomendations
 
 //------------------------------ Page Generators
 // Send back HTML for projects page
@@ -39,9 +40,9 @@ function getProjects(req, res) {
       .get(URL)
       .then((response) => {
         res.locals.projectPageData = response.data;
-
         // res.locals.projectListTemplate = getEJSTemplate("./views/partials/projectList.ejs");
         projectsCache.set(pageNum, response.data);
+
         res.render("pages/index");
       })
       .catch((err) => console.log(err));
@@ -94,6 +95,7 @@ function relayUserInfo(req, res) {
   }
 }
 
+// Fetch project data and display it on the server
 function getProject(req, res) {
   let id = req.params.id;
   const URL = `http://api.hackaday.io/v1/projects/${req.params.id}?api_key=${process.env.API_KEY}`;
@@ -103,12 +105,40 @@ function getProject(req, res) {
       .get(URL)
       .then((response) => {
         res.locals.projectInfo = response.data;
+        res.locals.recs = getRecommendProjects(response.data);
+        console.log("Response local obj------------------------", res.locals.recs);
         projectCache.set(id, response.data);
+      })
+      .then((response) => {
         res.render("pages/projectInfo");
       })
       .catch((err) => console.log(err));
   } else {
     res.locals.projectInfo = projectCache.get(id);
     res.render("pages/projectInfo");
+  }
+}
+
+function getRecommendProjects(projectData) {
+  let projectID = projectData.id;
+
+  // Iterate through tags and store project recs until
+  if (!recsCache.has(projectID)) {
+    let tags = projectData.tags;
+    let recs = [];
+    for (let i = 0; i < 3; i++) {
+      let URL = `https://api.hackaday.io/v1/search/projects?api_key=${process.env.API_KEY}&search_term=${tags[i % tags.length]}&per_page=2`;
+      axios
+        .get(URL)
+        .then((response) => {
+          recs.push(response.data);
+        })
+        .catch((err) => console.log(err));
+    }
+    recsCache.set(projectID, recs);
+    console.log(recs);
+    return recs;
+  } else {
+    return recsCache.get(id);
   }
 }
