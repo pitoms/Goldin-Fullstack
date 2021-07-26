@@ -3,9 +3,10 @@
 <script  src="./client.js"></script>
 <link rel="stylesheet" href="./build/styles/projectsList.css">
 
-<%- include('../partials/header')%>
+
 
 <body>
+<%- include('../partials/header')%>
 <div id = "projectsWrapper">
     <%- include('../partials/projectList')%>
 </div>
@@ -14,5 +15,7 @@
 </span>
 <button id ="prev" onclick ="prev(<%-projectPageData.page - 1%>)"> &#8249; </button>
 <button id="next" onclick ="next(<%-projectPageData.page + 1%>)"> &#8250; </button>
+<%- include('../partials/footer')%>
 </body>
+
 </html>

@@ -31,7 +31,7 @@ let recsCache = new Map(); // key = project #, value = JSON recomendations
 //------------------------------ Page Generators
 // Send back HTML for projects page
 function getProjects(req, res) {
-  let perPage = 10;
+  let perPage = 12;
   let pageNum = req.params.page || 1;
   const URL = `http://api.hackaday.io/v1/projects?api_key=${process.env.API_KEY}&per_page=${perPage}&page=${pageNum}`;
 
@@ -60,7 +60,7 @@ function getEJSTemplate(path) {
 
 // Relay the projects JSON data from API so key isn't exposed on client side.
 function relayProjects(req, res) {
-  let perPage = 10;
+  let perPage = 12;
   let pageNum = req.params.page || 1;
   const URL = `http://api.hackaday.io/v1/projects?api_key=${process.env.API_KEY}&per_page=${perPage}&page=${pageNum}`;
 
@@ -119,7 +119,7 @@ function getProject(req, res) {
   }
 }
 
-function getRecommendProjects(projectData) {
+async function getRecommendProjects(projectData) {
   let projectID = projectData.id;
 
   // Iterate through tags and store project recs until
@@ -129,7 +129,7 @@ function getRecommendProjects(projectData) {
     let recs = [];
     for (let i = 0; i < 3; i++) {
       let URL = `https://api.hackaday.io/v1/search/projects?api_key=${process.env.API_KEY}&search_term=${tags[i % tags.length]}&per_page=2`;
-      axios
+      await axios
         .get(URL)
         .then((response) => {
           recs.push(response.data);

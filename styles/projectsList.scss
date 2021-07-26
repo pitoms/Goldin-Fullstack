@@ -1,18 +1,102 @@
 $font-stack: Helvetica, sans-serif;
 $primary-color: #22031f;
 $secondary-color: #58a4b0;
+$backing-color: #fcfaf9;
+$backing-secondary-color: #002e2c;
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-#wrapper {
-  font: 100% $font-stack;
-  font-size: 2em;
-  color: $secondary-color;
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+body {
+  background-color: black;
+}
+
+html {
   background-color: $primary-color;
-  display: flexbox;
+}
+
+#footer {
+  background-color: $primary-color;
+  display: block;
+  text-align: center;
+  left: 0;
+  bottom: 0;
   width: 100%;
+  height: 50px;
+}
+
+#footer > a {
+  padding: 1rem;
 }
 
 .header {
   background-color: $primary-color;
   display: flexbox;
   width: 100%;
+  height: 50px;
+}
+
+#logo {
+  padding-left: 1em;
+  padding-top: 1em;
+}
+
+.project {
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  background-color: $backing-secondary-color;
+}
+
+.projectTitle {
+  display: block;
+  text-align: center;
+  bottom: 8px;
+  left: 16px;
+  z-index: 2;
+  color: white;
+  font-weight: 900;
+}
+
+#projectsWrapper {
+  font: 100% $font-stack;
+  color: $secondary-color;
+  background-color: black;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  grid-auto-rows: auto;
+  grid-gap: 0.5rem;
+  padding: 1rem 1rem;
+}
+
+.prjImg {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.9;
 }

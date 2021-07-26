@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="./build/styles/projectsList.css">
+
+<body>
+
+    <%- include('../partials/header')%>
 
     <%-console.log(projectInfo)%>
     <h4><%-projectInfo.name%></h4>
@@ -8,11 +13,10 @@
 
 
 <div>Related Projects</div>
-<%- console.log("ejs recs", recs)%>
-<% recs.forEach((rec)=>{%>
-    <div class="recommendation"><%-rec.name%></div>
-    <img src= "<%=rec.image_url%>"/>
 
 
-<% }) %>
+    <%- include('../partials/footer')%>
+</body>
+
+
 </html>

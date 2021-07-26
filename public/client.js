@@ -112,7 +112,6 @@ function buildProjectListHTML(projects) {
   projects.forEach((project) => {
     // Project div
     let projectDiv = document.createElement("div");
-    projectDiv.style.zIndex = -1;
     projectDiv.className = "project";
 
     //Tooltip div
@@ -135,8 +134,8 @@ function buildProjectListHTML(projects) {
 
     // Image div
     let prjImg = document.createElement("img");
-    prjImg.style.height = "10px";
     prjImg.src = project.image_url;
+    prjImg.className = "prjImg";
     projectDiv.appendChild(prjImg);
 
     let prjName = document.createElement("a");
@@ -153,7 +152,7 @@ function buildProjectListHTML(projects) {
 ///TODO: Refactor next and prev into one function
 // < button functionality
 function prev(currPage) {
-  if (currPage > 1) {
+  if (currPage >= 1) {
     page = currPage;
     console.log(`prev(${currPage})`);
     loadProjects(currPage);
@@ -183,6 +182,12 @@ function next(currPage) {
   history.pushState(null, "", window.location.href);
 
   // Replace the window url with incremented page
+
+  if (!window.location.href.includes("page=")) {
+    let newURL = window.location.href + "page=1";
+    history.replaceState(null, "", newURL);
+  }
+
   let newURL = window.location.href.split("=")[0] + "=" + (parseInt(window.location.href.split("=")[1]) + 1);
   history.replaceState(null, "", newURL);
 
