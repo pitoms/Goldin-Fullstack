@@ -3,7 +3,6 @@ import axios from "axios";
 import express from "express";
 import fs from "fs";
 import cors from "cors";
-import sass from "sass";
 import path from "path";
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -109,7 +108,7 @@ async function getProject(req, res) {
         projectCache.set(id, response.data);
       })
       .then(() => {
-        console.log("--------------------------------------------Response local obj------------------------", res.locals.projectPageData);
+        // console.log("--------------------------------------------Response local obj------------------------", res.locals.projectPageData);
         res.render("pages/projectInfo");
       })
       .catch((err) => console.log(err));
