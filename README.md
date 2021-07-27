@@ -1,2 +1,25 @@
 # Goldin-Fullstack
 Rebuilding Hackaday's projects list &amp; detail page
+
+## Usage
+Clone this repo to your local machine, and `npm install` from within the "Goldin-Fullstack" directory.
+Run `npm run dev` and a browser tab will open with the web app.
+
+## Requirements
+
+* Node 0.10.x
+
+## Executing program
+
+* Navigate to root directory
+* Install dependencies using `npm install`
+* Run web server using `npm run dev`
+```
+cd Goldin-Fullstack
+npm install
+npm run dev
+```
+
+
+## Future improvements
+The code here needs to be refactored - some of it is repetitive and can be fixed by creating more abstract, resusable functions. (DRY) Separating the css files, and client js functions will help for readability as well.
