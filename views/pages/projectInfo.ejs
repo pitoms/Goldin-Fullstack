@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="./build/styles/projectsList.css">
-
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 <body>
 
     <%- include('../partials/header')%>
 
     <%-console.log(projectInfo)%>
-    <h4><%-projectInfo.name%></h4>
-    <img src="<%= projectInfo.image_url%>" style = "height:50px"/>
-    <div class="desc"><%-projectInfo.summary%></div>
-    <div class="tags"><%-projectInfo.tags%> Updated: <%-`${projectInfo.updated}` %></div>
+    <div class="content">
+    <h1 class="title"><%-projectInfo.name%></h1>
+    <span class="author">by <%= projectInfo.owner_id%>  last edit: <%-`${projectInfo.updated}` %></span>
+    <img class="infoImg"src="<%= projectInfo.image_url%>" />
+    <div class="desc"><%-projectInfo.description%></div>
+   
+    <h2 >Related Projects</h2>
+    <div class="tags"><%-projectInfo.tags%> </div>
 
+</div>
 
-<div>Related Projects</div>
 
 
     <%- include('../partials/footer')%>

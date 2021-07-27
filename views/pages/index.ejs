@@ -2,19 +2,23 @@
 <script  src="./ejs.js"></script>
 <script  src="./client.js"></script>
 <link rel="stylesheet" href="./build/styles/projectsList.css">
-
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 
 
 <body>
 <%- include('../partials/header')%>
+<main>
 <div id = "projectsWrapper">
     <%- include('../partials/projectList')%>
 </div>
 
 <span id="template" style="display:none"  >
 </span>
+<div class="pageNav">
 <button id ="prev" onclick ="prev(<%-projectPageData.page - 1%>)"> &#8249; </button>
 <button id="next" onclick ="next(<%-projectPageData.page + 1%>)"> &#8250; </button>
+</div>
+</main>
 <%- include('../partials/footer')%>
 </body>
 

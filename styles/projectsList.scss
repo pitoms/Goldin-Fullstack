@@ -1,4 +1,3 @@
-$font-stack: Helvetica, sans-serif;
 $primary-color: #22031f;
 $secondary-color: #58a4b0;
 $backing-color: #fcfaf9;
@@ -22,6 +21,7 @@ $backing-secondary-color: #002e2c;
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -31,17 +31,46 @@ a {
   text-decoration: none;
   color: white;
 }
+button {
+  width: 50%;
+  background-color: #002e2c;
+  border-style: none;
+  color: white;
+  font-weight: 900;
+  font-size: xx-large;
+}
+button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
 body {
   background-color: black;
+  min-height: 100vh;
+  flex-direction: column;
 }
-
+.content {
+  padding: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+}
+.desc {
+  color: white;
+  font-family: dosis;
+}
 html {
   background-color: $primary-color;
 }
 
+@font-face {
+  font-family: dosis;
+  src: url(./public/fonts/Dosis-VariableFont_wght.ttf);
+}
 #footer {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: $primary-color;
   display: block;
+  position: fixed;
   text-align: center;
   left: 0;
   bottom: 0;
@@ -50,14 +79,45 @@ html {
 }
 
 #footer > a {
-  padding: 1rem;
+  display: block;
+  padding-top: 1rem;
+}
+h2 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid rgb(134, 118, 118);
+  line-height: 0.1em;
+  margin: 10px 0 20px;
 }
 
-.header {
+h2 span {
+  background: rgb(0, 0, 0);
+  padding: 0 10px;
+}
+
+#header {
   background-color: $primary-color;
   display: flexbox;
   width: 100%;
   height: 50px;
+}
+.infoImg {
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+}
+
+.loadingImg {
+  object-fit: cover;
+  height: 250px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  width: 250px;
+  display: inline-flex;
+  margin-top: -125px;
+  margin-left: -125px;
+  z-index: 1;
 }
 
 #logo {
@@ -65,9 +125,11 @@ html {
   padding-top: 1em;
 }
 
+.pageNav {
+  display: flex;
+}
 .project {
   border-radius: 4px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
   background-color: $backing-secondary-color;
 }
 
@@ -78,19 +140,29 @@ html {
   left: 16px;
   z-index: 2;
   color: white;
-  font-weight: 900;
+  font-weight: 500;
 }
 
 #projectsWrapper {
-  font: 100% $font-stack;
+  font-family: dosis;
   color: $secondary-color;
   background-color: black;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-
-  grid-auto-rows: auto;
+  grid-template-rows: repeat(3, 25vh);
   grid-gap: 0.5rem;
-  padding: 1rem 1rem;
+  padding: 1rem 18rem;
+}
+
+@media only screen and (max-width: 1450px) and (min-width: 800px) {
+  #projectsWrapper {
+    padding: 0.5rem;
+  }
+}
+@media only screen and (max-width: 800px) {
+  #projectsWrapper {
+    padding: 0;
+  }
 }
 
 .prjImg {
@@ -99,4 +171,26 @@ html {
   object-fit: cover;
   display: block;
   opacity: 0.9;
+}
+
+.title {
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.tooltip {
+  position: fixed;
+  top: 0;
+  left: 30%;
+  background-color: #22031f;
+  width: 10vw;
+  z-index: 5;
+}
+
+.tooltip > img {
+  height: 100%;
+}
+
+.tooltip > span {
+  width: 100%;
+  display: block;
 }

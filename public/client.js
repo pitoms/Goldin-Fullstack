@@ -16,7 +16,8 @@ function loadProjects(pageNum) {
   console.log(`Displaying page num:${pageNum}`);
   console.log("Requesting: ", `http://localhost:4000/relayProjects=${pageNum}`);
   let loadingImg = document.createElement("img");
-  loadingImg.src = "https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=82a1493bn64f95wlrhgldv1wfihr40dyux2r8o37f5wjlmpg&rid=200w.gif&ct=g";
+  loadingImg.src = "img/loading.gif";
+  loadingImg.className = "loadingImg";
   document.getElementById("projectsWrapper").innerHTML = "";
   document.getElementById("projectsWrapper").appendChild(loadingImg);
 
@@ -33,7 +34,6 @@ function loadProjects(pageNum) {
     .then((data) => {
       projects = data.projects;
       buildProjectListHTML(projects);
-
       console.log(projects);
     })
     .catch((err) => {
@@ -90,7 +90,7 @@ function fetchUsers() {
 //Add user data html to tooltips
 function fillToolTip(tooltip, userData) {
   console.log("filling tooltip:", tooltip);
-
+  console.log("potential tooltip data", userData);
   tooltip.innerHTML = "";
   //Profile image
   let profPic = document.createElement("img");
@@ -99,7 +99,7 @@ function fillToolTip(tooltip, userData) {
   tooltip.appendChild(profPic);
 
   let name = document.createElement("span");
-  name.innerText = userData.screen_name;
+  name.innerText = "built by: " + userData.screen_name;
   tooltip.appendChild(name);
 }
 
@@ -118,9 +118,6 @@ function buildProjectListHTML(projects) {
     let tooltip = document.createElement("div");
     tooltip.className = "tooltip";
     tooltip.style.display = "none";
-    tooltip.style.zIndex = 5;
-    tooltip.style.position = "absolute";
-    tooltip.style.backgroundColor = "white";
     tooltip.innerText = project.owner_id;
 
     projectDiv.appendChild(tooltip);
