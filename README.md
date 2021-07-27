@@ -1,5 +1,5 @@
 # Goldin-Fullstack
-Rebuilding Hackaday's projects list &amp; detail page
+Rebuilding Hackaday's projects list &amp; detail page. Write up can be found *[here.] <https://docs.google.com/document/d/1WP-cSH8p0pu5UNeZanZOGayIXHXunyE6LP70l_-WJvw/edit?usp=sharing>*
 
 ## Usage
 Clone this repo to your local machine, and `npm install` from within the "Goldin-Fullstack" directory.  
