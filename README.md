@@ -2,8 +2,8 @@
 Rebuilding Hackaday's projects list &amp; detail page
 
 ## Usage
-Clone this repo to your local machine, and `npm install` from within the "Goldin-Fullstack" directory.
-Head over to https://dev.hackaday.io/ and grab an API key. Create a .env file and create a variable named API_KEY = 'my_api_key_from_hackaday_website'
+Clone this repo to your local machine, and `npm install` from within the "Goldin-Fullstack" directory.  
+Head over to https://dev.hackaday.io/ and grab an API key. Create a .env file and create a variable named API_KEY = 'my_api_key_from_hackaday_website'  
 Run `npm run dev` and a browser tab will open with the web app.
 
 ## Requirements
