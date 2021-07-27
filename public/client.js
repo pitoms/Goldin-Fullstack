@@ -136,6 +136,7 @@ function buildProjectListHTML(projects) {
     projectDiv.appendChild(prjImg);
 
     let prjName = document.createElement("a");
+    prjName.className = "projectTitle";
     prjName.href = `http://localhost:4000/project=${project.id}`;
     prjName.innerText = project.name;
     projectDiv.appendChild(prjName);

@@ -96,7 +96,7 @@ function relayUserInfo(req, res) {
 }
 
 // Fetch project data and display it on the server
-function getProject(req, res) {
+async function getProject(req, res) {
   let id = req.params.id;
   const URL = `http://api.hackaday.io/v1/projects/${req.params.id}?api_key=${process.env.API_KEY}`;
 
@@ -105,11 +105,11 @@ function getProject(req, res) {
       .get(URL)
       .then((response) => {
         res.locals.projectInfo = response.data;
-        res.locals.recs = getRecommendProjects(response.data);
-        console.log("Response local obj------------------------", res.locals.recs);
+        res.locals.projectPageData = getRecommendProjects(response.data);
         projectCache.set(id, response.data);
       })
-      .then((response) => {
+      .then(() => {
+        console.log("--------------------------------------------Response local obj------------------------", res.locals.projectPageData);
         res.render("pages/projectInfo");
       })
       .catch((err) => console.log(err));

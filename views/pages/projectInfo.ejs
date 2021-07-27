@@ -7,12 +7,15 @@
 
     <%-console.log(projectInfo)%>
     <div class="content">
+    <div class ="left">
     <h1 class="title"><%-projectInfo.name%></h1>
     <span class="author">by <%= projectInfo.owner_id%>  last edit: <%-`${projectInfo.updated}` %></span>
     <img class="infoImg"src="<%= projectInfo.image_url%>" />
+    </div>
     <div class="desc"><%-projectInfo.description%></div>
+</div>
    
-    <h2 >Related Projects</h2>
+    <h2><span>Related Projects</span></h2>
     <div class="tags"><%-projectInfo.tags%> </div>
 
 </div>
